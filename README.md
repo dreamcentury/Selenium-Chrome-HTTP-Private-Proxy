@@ -5,7 +5,7 @@ This trick can be use for all basic auth in your test with Selenium and Chrome.
 
 Thanks to [henices](https://github.com/henices/Chrome-proxy-helper) who codes Chrome Proxy Helper. This fork uses it code base.
 
-This plugin is maintained by [Robin (PHP developer in Marseille)][http://www.robin-d.fr/]. Report your issues with Github.
+This plugin is maintained by [Robin (PHP developer in Marseille)](http://www.robin-d.fr/). Report your issues with Github.
 
 ## How to use it
 
