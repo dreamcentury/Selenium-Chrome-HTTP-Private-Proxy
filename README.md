@@ -1,42 +1,40 @@
-# Introduction
-By default, Chrome use the system proxy setting (IE proxy settings on Windows platform ),
-but sometime we want to set proxy *ONLY* for chrome, not the whole system. Chrome proxy 
-helper extension use Chrome native proxy API to set proxy, support  socks5, socks4, http 
-and https protocol and pac script, Fast And Simple.
+# Selenium Chrome HTTP Private Proxy
 
-# Features
-* support socks4, socks5, http, https proxy settings
-* support pac proxy settings
-* support bypass list
-* support online pac script
-* support customer proxy rules
-* support proxy authentication
-* support extension settings synchronize
+This plugin permit to use proxy with a basic authentication with Chrome and Selenium ([it's impossible](http://docs.seleniumhq.org/docs/04_webdriver_advanced.jsp#using-a-proxy)).
+This trick can be use for all basic auth in your test with Selenium and Chrome.
 
-# Install
-* Install the latest stable version on chrome web store by click [here](https://chrome.google.com/webstore/detail/proxy-helper/mnloefcpaepkpmhaoipjkpikbnkmbnic).
-* Install the unstable version by cloning the [Git](https://github.com/henices/Chrome-proxy-helper.git) repository:
+Thanks to [henices](https://github.com/henices/Chrome-proxy-helper) who codes Chrome Proxy Helper. This fork uses it code base.
 
+This plugin is maintained by [Robin (PHP developer in Marseille)][http://www.robin-d.fr/]. Report your issues with Github.
+
+## How to use it
+
+I use webDriver with a PHP client. So, this example will be in PHP.
+**The logic is the same with another language (java, python... same protocol).**
+```php
+$pluginForProxyLogin = '/tmp/a'.uniqid().'.zip';
+
+$zip = new ZipArchive();
+$res = $zip->open($pluginForProxyLogin, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+$zip->addFile('/path/to/Chrome-proxy-helper/manifest.json', 'manifest.json');
+$background = file_get_contents('/path/to/Chrome-proxy-helper/background.js');
+$background = str_replace(['%proxy_host', '%proxy_port', '%username', '%password'], ['5.39.64.181', '54991', 'd1g1m00d', '13de02d0e0z9'], $background);
+$zip->addFromString('background.js', $background);
+$zip->close();
+
+putenv("webdriver.chrome.driver=/path/to/chromedriver");
+
+$options = new ChromeOptions();
+$options->addExtensions([$pluginForProxyLogin]);
+$caps = DesiredCapabilities::chrome();
+$caps->setCapability(ChromeOptions::CAPABILITY, $options);
+
+$driver = ChromeDriver::start($caps);
+$driver->get('https://old-linux.com/ip/');
+
+header('Content-Type: image/png');
+echo $driver->takeScreenshot();
+
+
+unlink($pluginForProxyLogin);
 ```
-    git clone https://github.com/henices/Chrome-proxy-helper.git
-```
-
-# Document
-
-* [Help](https://github.com/henices/Chrome-proxy-helper/wiki)
-* [FAQ](https://github.com/henices/Chrome-proxy-helper/wiki/FAQ)
-
-# LICENSE
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 2 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
- 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <http://www.gnu.org/licenses/>
-
