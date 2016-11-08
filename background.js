@@ -6,9 +6,9 @@ var config = {
           singleProxy: {
             scheme: "http",
             host: "%proxy_host",
-            port: parseInt(%proxy_port)
+            port: parseInt("%proxy_port")
           },
-          bypassList: ["foobar.com"]
+          bypassList: []
         }
       };
 
