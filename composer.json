@@ -12,6 +12,7 @@
 	{ 
 		"name" : "Clément Colpier",
 		"email" : "c.colpier@dreamcentury.com"
+	}
   ],
   "minimum-stability" : "dev"
 }
