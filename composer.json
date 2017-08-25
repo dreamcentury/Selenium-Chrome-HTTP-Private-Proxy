@@ -1,0 +1,17 @@
+{
+  "name" : "dreamcentury/selenium-chrome-http-private-proxy",
+  "type" : "project",
+  "description" : "The core of DreamCentury FrameWork for all site. ",
+  "keywords" : [ "selenium","driver","chrome" ],
+  "homepage" : "http://www.dreamcentury.com",
+  "authors" : [
+	{
+	  "name" : "Mathieu Vedie",
+	  "email" : "m.vedie@dreamcentury.com"
+	}, 
+	{ 
+		"name" : "Clément Colpier",
+		"email" : "c.colpier@dreamcentury.com"
+  ],
+  "minimum-stability" : "dev"
+}
